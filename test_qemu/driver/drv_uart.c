@@ -8,7 +8,7 @@ void uart_putc(char c)
 
 char uart_getc(void)
 {
-    uint32_t addr = QEMU_UART_BASE;
+    virtual_addr_t addr = QEMU_UART_BASE;
     if (*UART_LSR & LSR_RX_READY){
         return read32(addr + RHR);
     } 
