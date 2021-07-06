@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <drv_uart.h>
+#include <printf.h>
+
+void _putchar(char character)
+{
+  uart_putc(character);
+}
 
 int main(void)
 {
     uart_init();
-    uart_putc('a');
-    uart_putc('b');
-    uart_putc('c');
+    printf("hello\n");
     return 0;
 }
