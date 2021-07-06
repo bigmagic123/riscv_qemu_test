@@ -13,7 +13,7 @@ linker_script = join_paths(meson.current_source_dir(), 'link.ld')
 
 add_project_link_arguments('-T', linker_script ,'-nostdlib', '-nostartfiles', language: 'c')
 
-exe = executable('virt_test', sources, include_directories:[inc])
+exe = executable('virt_test.elf', sources, include_directories:[inc])
 
 hex = custom_target('demo.bin',
   build_by_default: true,
