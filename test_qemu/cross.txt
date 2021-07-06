@@ -8,6 +8,7 @@ strip = cross_pass + 'strip'
 [properties]
 cross_pass = '/home/zhaofujin/esp/xpack-riscv-none-embed-gcc-10.1.0-1.1/bin/riscv-none-embed-' 
 objcopy = cross_pass + 'objcopy'
+objdump = cross_pass + 'objdump'
 needs_exe_wrapper = true
 
 [host_machine]
