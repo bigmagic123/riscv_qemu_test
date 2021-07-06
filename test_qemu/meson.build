@@ -1,22 +1,19 @@
-project('example', 'c')
+project('virt_test', 'c')
 
 sources = []
 inc     = []
 
+subdir( 'application' )
 subdir( 'driver' )
+subdir( 'src' )
 
-add_project_arguments('-march=rv32imc', language: 'c')
-linker_script1 = join_paths(meson.current_source_dir(), 'ld/esp32c3.ld')
-linker_script2 = join_paths(meson.current_source_dir(), 'ld/common.ld')
-linker_script3 = join_paths(meson.current_source_dir(), 'ld/romfuncs.ld')
+add_project_arguments('-march=rv64imafdc' ,'-mabi=lp64d','-fno-omit-frame-pointer', '-nostartfiles', '-MD', '-mcmodel=medany', '-ffreestanding', '-fno-common' ,'-nostdlib', '-mno-relax', language: 'c')
 
-add_project_link_arguments('-T', linker_script1 ,'-T', linker_script2 ,'-T', linker_script3 ,'-march=rv32imc', '--specs=nano.specs', '--specs=nosys.specs', '-nostartfiles', language: 'c')
+linker_script = join_paths(meson.current_source_dir(), 'link.ld')
 
-sources += files('main.c')
-sources += files('start.S')
-sources += files('vectors.S')
+add_project_link_arguments('-T', linker_script ,'-nostdlib', '-nostartfiles', language: 'c')
 
-exe = executable('example', sources, include_directories:[inc])
+exe = executable('virt_test', sources, include_directories:[inc])
 
 hex = custom_target('demo.bin',
   build_by_default: true,
