@@ -26,9 +26,11 @@ rv64imc/lp64;@march=rv64imc@mabi=lp64
 rv64imac/lp64;@march=rv64imac@mabi=lp64
 rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
 rv64imafdc/lp64d;@march=rv64imafdc@mabi=lp64d
+
+-march=rv32gcp -mabi=ilp32d
 '''
-add_project_arguments('-march=rv64imafdc' ,'-mabi=lp64d', language: 'c')
-add_project_link_arguments('-march=rv64imafdc' ,'-mabi=lp64d', language: 'c')
+add_project_arguments('-march=rv32gcp' ,'-mabi=ilp32d', language: 'c')
+add_project_link_arguments('-march=rv32gcp' ,'-mabi=ilp32d', language: 'c')
 
 exe = executable('example', sources, include_directories:[inc])
 
