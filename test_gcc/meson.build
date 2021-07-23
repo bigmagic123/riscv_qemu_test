@@ -3,18 +3,32 @@ project('example', 'c')
 sources = []
 inc     = []
 
-subdir( 'driver' )
-
-add_project_arguments('-march=rv32imc', language: 'c')
-linker_script1 = join_paths(meson.current_source_dir(), 'ld/esp32c3.ld')
-linker_script2 = join_paths(meson.current_source_dir(), 'ld/common.ld')
-linker_script3 = join_paths(meson.current_source_dir(), 'ld/romfuncs.ld')
-
-add_project_link_arguments('-T', linker_script1 ,'-T', linker_script2 ,'-T', linker_script3 ,'-march=rv32imc', '--specs=nano.specs', '--specs=nosys.specs', '-nostartfiles', language: 'c')
-
-sources += files('main.c')
-sources += files('start.S')
-sources += files('vectors.S')
+subdir( 'test' )
+'''
+riscv64-unknown-elf-gcc -print-multi-lib
+rv32i/ilp32;@march=rv32i@mabi=ilp32
+rv32ic/ilp32;@march=rv32ic@mabi=ilp32
+rv32im/ilp32;@march=rv32im@mabi=ilp32
+rv32imc/ilp32;@march=rv32imc@mabi=ilp32
+rv32iac/ilp32;@march=rv32iac@mabi=ilp32
+rv32imac/ilp32;@march=rv32imac@mabi=ilp32
+rv32imafc/ilp32f;@march=rv32imafc@mabi=ilp32f
+rv32imafdc/ilp32d;@march=rv32imafdc@mabi=ilp32d
+rv32e/ilp32e;@march=rv32e@mabi=ilp32e
+rv32ec/ilp32e;@march=rv32ec@mabi=ilp32e
+rv32emc/ilp32e;@march=rv32emc@mabi=ilp32e
+rv32ema/ilp32e;@march=rv32ema@mabi=ilp32e
+rv32emac/ilp32e;@march=rv32emac@mabi=ilp32e
+rv32eac/ilp32e;@march=rv32eac@mabi=ilp32e
+rv64i/lp64;@march=rv64i@mabi=lp64
+rv64im/lp64;@march=rv64im@mabi=lp64
+rv64imc/lp64;@march=rv64imc@mabi=lp64
+rv64imac/lp64;@march=rv64imac@mabi=lp64
+rv64imafc/lp64f;@march=rv64imafc@mabi=lp64f
+rv64imafdc/lp64d;@march=rv64imafdc@mabi=lp64d
+'''
+add_project_arguments('-march=rv64imafdc' ,'-mabi=lp64d', language: 'c')
+add_project_link_arguments('-march=rv64imafdc' ,'-mabi=lp64d', language: 'c')
 
 exe = executable('example', sources, include_directories:[inc])
 
@@ -25,3 +39,10 @@ hex = custom_target('demo.bin',
   command : [meson.get_external_property('objcopy'), '-O', 'binary','@INPUT@','@OUTPUT@'],
 )
 
+dump = custom_target('demo.dump',
+  capture          : true,
+  build_by_default: true,
+  input : exe,
+  output : 'demo.dump',
+  command : [meson.get_external_property('objdump'), '-D', '-S', '-t', '@INPUT@'],
+)
