@@ -2,7 +2,7 @@ OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
 OUTPUT_ARCH(riscv)
 ENTRY(_start)
 
-STACK_SIZE = 0x40000;
+STACK_SIZE = 0x4000;
 
 /* gd32vf103 main flash 0x8000000 */
 /* qemu virt 0x80000000 */
