@@ -3,6 +3,8 @@ project('virt_test', 'c')
 sources = []
 inc     = []
 
+inc += include_directories('configs')
+
 subdir( 'application' )
 subdir( 'driver' )
 subdir( 'src' )
@@ -10,8 +12,9 @@ subdir( 'src' )
 add_project_arguments('-march=rv64imafdc' ,'-mabi=lp64d','-fno-omit-frame-pointer', '-nostartfiles', '-MD', '-mcmodel=medany', '-ffreestanding', '-fno-common' ,'-nostdlib', '-mno-relax', language: 'c')
 
 linker_script = join_paths(meson.current_source_dir(), 'link.ld')
+linker_script_board = join_paths(meson.current_source_dir(), 'configs/link_board.lds')
 
-add_project_link_arguments('-T', linker_script ,'-nostdlib', '-nostartfiles', language: 'c')
+add_project_link_arguments('-T', linker_script_board, '-T', linker_script ,'-nostdlib', '-nostartfiles', language: 'c')
 
 exe = executable('virt_test.elf', sources, include_directories:[inc])
 

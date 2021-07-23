@@ -2,11 +2,9 @@ OUTPUT_FORMAT("elf64-littleriscv", "elf64-littleriscv", "elf64-littleriscv")
 OUTPUT_ARCH(riscv)
 ENTRY(_start)
 
-STACK_SIZE = 0x40000;
-
 MEMORY
 {
-    ram  : org = 0x80000000, len = 128M
+    ram  : org = START_ADDR, len = 128M
 }
 
 SECTIONS
