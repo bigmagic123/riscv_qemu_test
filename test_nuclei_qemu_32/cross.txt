@@ -14,6 +14,6 @@ needs_exe_wrapper = true
 
 [host_machine]
 system = 'bare metal'
-cpu_family = 'riscv64'
-cpu = 'qemu-riscv64-virt'
+cpu_family = 'riscv32'
+cpu = 'qemu-riscv32-virt'
 endian = 'little'

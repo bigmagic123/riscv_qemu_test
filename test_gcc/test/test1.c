@@ -5,8 +5,8 @@
 int main()
 {
     int64_t a, b, c;
-    //c = __rv__ursub64(a, b);
-    c = __rv__dkhm8(a, b);
+   // c = __rv__ursub64(a, b);
+    c = __rv__kadd64(a, b);
     printf("hello world!\n");
     return 0;
 }

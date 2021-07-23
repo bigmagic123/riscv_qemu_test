@@ -2,41 +2,26 @@
 #define __VIRT_UART_H__
 
 #include <ttypes.h>
+/* peripheral memory map */
+#define APB1_BUS_BASE         ((uint32_t)0x40000000U)        /*!< apb1 base address                */
+#define APB2_BUS_BASE         ((uint32_t)0x40010000U)        /*!< apb2 base address                */
+#define AHB1_BUS_BASE         ((uint32_t)0x40018000U)        /*!< ahb1 base address                */
+#define AHB3_BUS_BASE         ((uint32_t)0x60000000U)        /*!< ahb3 base address                */
+#define USART_BASE            (APB1_BUS_BASE + 0x00004400U) 
 
-#ifdef QEMU_VIRT
-#define QEMU_UART_BASE            (0x10000000L)
+#define USART1                        USART_BASE                        /*!< USART1 base address */
+#define USART2                        (USART_BASE+(0x00000400U))        /*!< USART2 base address */
+#define UART3                         (USART_BASE+(0x00000800U))        /*!< UART3 base address */
+#define GD32VF103_UART4               (USART_BASE+(0x00000C00U))        /*!< UART4 base address */
+#define USART0                        (USART_BASE+(0x0000F400U))        /*!< USART0 base address */
 
-#define RHR 0    // Receive Holding Register (read mode)
-#define THR 0    // Transmit Holding Register (write mode)
-#define DLL 0    // LSB of Divisor Latch (write mode)
-#define IER 1    // Interrupt Enable Register (write mode)
-#define DLM 1    // MSB of Divisor Latch (write mode)
-#define FCR 2    // FIFO Control Register (write mode)
-#define ISR 2    // Interrupt Status Register (read mode)
-#define LCR 3    // Line Control Register
-#define MCR 4    // Modem Control Register
-#define LSR 5    // Line Status Register
-#define MSR 6    // Modem Status Register
-#define SPR 7    // ScratchPad Register
-
-#define LSR_RX_READY (1 << 0)
-#define LSR_TX_IDLE  (1 << 5)
-#define UART_LSR (volatile uint8_t *)(QEMU_UART_BASE + 0x05)
-#define UART_LSR_THRE       0x20
-#endif
-
-#ifdef  QEMU_GD32VF
-#define GD32VF103_UART4 (0x40005000)
-
-#define NUCLEI_UART_REG_TXDATA 0x000
-#define NUCLEI_UART_REG_RXDATA 0x004
+#define NUCLEI_UART_REG_STAT 0x000
+#define NUCLEI_UART_REG_TXRXDATA 0x004
 #define NUCLEI_UART_REG_TXCTRL 0x008
 #define NUCLEI_UART_REG_RXCTRL 0x00C
 #define NUCLEI_UART_REG_IE 0x010
 #define NUCLEI_UART_REG_IP 0x014
 #define NUCLEI_UART_REG_DIV 0x018
-
-#endif
 
 void uart_putc(char c);
 char uart_getc(void);
