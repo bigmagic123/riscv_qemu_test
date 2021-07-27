@@ -7,7 +7,6 @@
 
 #include <drv_test.h>
 
-#include <riscv_dsp.h>
 
 void _putchar(char character)
 {
@@ -27,10 +26,7 @@ int main(void)
     printf("hello!\n");
     //virt_test();
     printf("test ok!\n");
-
-    b = __rv__dkabs8(a);
-
-    printf("b is %d\n", b);
+    test_dsp();
     //test_csr();
     return 0;
 }
