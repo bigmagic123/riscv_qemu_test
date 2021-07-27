@@ -9,7 +9,7 @@ STACK_SIZE = 0x4000;
 
 MEMORY
 {
-    ram  : org = 0x8000000, len = 128M
+    ram  : org = 0x80000000, len = 128M
 }
 
 SECTIONS

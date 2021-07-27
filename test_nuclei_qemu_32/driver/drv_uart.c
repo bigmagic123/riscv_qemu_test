@@ -3,7 +3,10 @@
 void uart_putc(char c)
 {
     //while((*UART_LSR & UART_LSR_THRE) == 0);
-    write32(GD32VF103_UART4 + NUCLEI_UART_REG_TXRXDATA, c);
+    //write32(GD32VF103_UART4 + NUCLEI_UART_REG_TXRXDATA, c);
+
+    write32(NUCLEI_N_DEV_UART0 + NUCLEI_UART_REG_STAT, c);
+    
 }
 
 char uart_getc(void)

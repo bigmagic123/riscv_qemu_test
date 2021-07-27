@@ -8,11 +8,11 @@ subdir( 'driver' )
 subdir( 'src' )
 
 # gd32vf103
-add_project_arguments('-march=rv32imac' ,'-mabi=ilp32', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
+add_project_arguments('-march=rv32imafdcp' ,'-mabi=ilp32d', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
 
 linker_script = join_paths(meson.current_source_dir(), 'link.ld')
 
-add_project_link_arguments('-T', linker_script , '-march=rv32imac' ,'-nostartfiles','-mabi=ilp32','-mcmodel=medany', language: 'c')
+add_project_link_arguments('-T', linker_script , '-march=rv32imafdcp' ,'-nostartfiles','-mabi=ilp32d','-mcmodel=medany', language: 'c')
 
 exe = executable('virt_test.elf', sources, include_directories:[inc])
 

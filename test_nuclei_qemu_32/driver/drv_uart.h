@@ -15,6 +15,8 @@
 #define GD32VF103_UART4               (USART_BASE+(0x00000C00U))        /*!< UART4 base address */
 #define USART0                        (USART_BASE+(0x0000F400U))        /*!< USART0 base address */
 
+#define NUCLEI_N_DEV_UART0            (0x10013000)
+
 #define NUCLEI_UART_REG_STAT 0x000
 #define NUCLEI_UART_REG_TXRXDATA 0x004
 #define NUCLEI_UART_REG_TXCTRL 0x008
