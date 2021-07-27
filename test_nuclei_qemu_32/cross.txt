@@ -1,5 +1,5 @@
 [constants]
-cross_pass = '/home/zhaofujin/esp/xpack-riscv-none-embed-gcc-10.1.0-1.1/bin/riscv-none-embed-' 
+cross_pass = '/home/zhaofujin/workspace/gcc/work/riscv-gnu-toolchain/linux_gcc_bin/bin/riscv64-unknown-elf-' 
 
 [binaries]
 c = cross_pass + 'gcc'

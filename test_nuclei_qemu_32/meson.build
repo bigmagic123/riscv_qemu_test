@@ -7,13 +7,12 @@ subdir( 'application' )
 subdir( 'driver' )
 subdir( 'src' )
 
+# gd32vf103
 add_project_arguments('-march=rv32imac' ,'-mabi=ilp32', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
 
 linker_script = join_paths(meson.current_source_dir(), 'link.ld')
 
 add_project_link_arguments('-T', linker_script , '-march=rv32imac' ,'-nostartfiles','-mabi=ilp32','-mcmodel=medany', language: 'c')
-
-add_project_arguments('-DQEMU_GD32VF=1', language: 'c')
 
 exe = executable('virt_test.elf', sources, include_directories:[inc])
 

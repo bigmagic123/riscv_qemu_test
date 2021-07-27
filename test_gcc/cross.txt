@@ -1,5 +1,5 @@
 [constants]
-cross_pass = '/home/zhaofujin/RISCV/0714/rv32p3/bin/riscv32-unknown-elf-'
+cross_pass = '/home/zhaofujin/RISCV/0723/rv32p/bin/riscv32-unknown-elf-'
 
 [binaries]
 c = cross_pass + 'gcc'
