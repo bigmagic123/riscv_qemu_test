@@ -8,11 +8,19 @@ subdir( 'driver' )
 subdir( 'src' )
 
 # gd32vf103
-add_project_arguments('-march=rv32imafdcp' ,'-mabi=ilp32d', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
+#add_project_arguments('-march=rv32imafdcp' ,'-mabi=ilp32d', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
 
-linker_script = join_paths(meson.current_source_dir(), 'link.ld')
+#linker_script = join_paths(meson.current_source_dir(), 'link.ld')
 
-add_project_link_arguments('-T', linker_script , '-march=rv32imafdcp' ,'-nostartfiles','-mabi=ilp32d','-mcmodel=medany', language: 'c')
+#add_project_link_arguments('-T', linker_script , '-march=rv32imafdcp' ,'-nostartfiles','-mabi=ilp32d','-mcmodel=medany', language: 'c')
+
+
+add_project_arguments('-march=rv64imafdcp' ,'-mabi=lp64d', '-nostartfiles','-mcmodel=medany','-ffunction-sections', '-fdata-sections', '-fno-common', language: 'c')
+
+linker_script = join_paths(meson.current_source_dir(), 'link_64.ld')
+
+add_project_link_arguments('-T', linker_script , '-march=rv64imafdcp' ,'-nostartfiles','-mabi=lp64d','-mcmodel=medany', language: 'c')
+
 
 exe = executable('virt_test.elf', sources, include_directories:[inc])
 

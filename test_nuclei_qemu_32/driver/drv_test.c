@@ -3,7 +3,7 @@
 
 //qemu/hw/riscv/virt.c
 //[VIRT_TEST] =        {   0x100000,        0x1000 },
-#define VIRT_TEST_BASE 0x100000
+#define VIRT_TEST_BASE 0x1000000//0x100000
 #define VIRT_TEST_SIEZ 0x1000
 
 enum {

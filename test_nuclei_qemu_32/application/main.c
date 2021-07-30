@@ -26,6 +26,7 @@ int main(void)
     printf("hello!\n");
     //virt_test();
     printf("test ok!\n");
+    //virt_test();
     test_dsp();
     //test_csr();
     return 0;
