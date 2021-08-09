@@ -22,6 +22,9 @@ void test_csr()
 int main(void)
 {
     int a = -7, b = 0;
+#if __riscv_xlen == 64
+    htif_init();
+#endif
     uart_init();
     printf("hello!\n");
     //virt_test();

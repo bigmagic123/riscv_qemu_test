@@ -25,6 +25,17 @@
 #define NUCLEI_UART_REG_IP 0x014
 #define NUCLEI_UART_REG_DIV 0x018
 
+#if __riscv_xlen == 64
+# define TOHOST_CMD(dev, cmd, payload) \
+  (((uint64_t)(dev) << 56) | ((uint64_t)(cmd) << 48) | (uint64_t)(payload))
+#else
+# define TOHOST_CMD(dev, cmd, payload) ({ \
+  if ((dev) || (cmd)) __builtin_trap(); \
+  (payload); })
+#endif
+
+void htif_init(void);
+
 void uart_putc(char c);
 char uart_getc(void);
 void uart_init(void);

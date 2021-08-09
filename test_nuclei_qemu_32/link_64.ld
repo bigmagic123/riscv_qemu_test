@@ -85,6 +85,16 @@ SECTIONS
         PROVIDE(__rodata_end = .);
     } > ram
 
+    /*--------------------------------------------------------------------*/
+    /* HTIF, isolated onto separate page                                  */
+    /*--------------------------------------------------------------------*/
+    .htif :
+    {
+        PROVIDE( __htif_base = . );
+        *(.htif)
+    } > ram
+    . = ALIGN(0x1000);
+
     .data ALIGN(8) :
     {
         PROVIDE(__data_start = .);
