@@ -53,6 +53,9 @@ uint16x4_t  test_a16 = {1,2,3,4};
 uint16x4_t  test_b16 = {8,7,6,5};
 uint16x4_t  test_c16;
 
+int32x2_t  test_ia32 = {1,2};
+int32x2_t  test_ib32 = {3,4};
+int32x2_t test_ic32;
 
 int8x8_t  test_ia = {1,2,3,4,5,6,7,8};
 int8x8_t  test_ib = {8,7,6,5,4,3,2,1};
@@ -78,7 +81,7 @@ static void test_add8(void)
 {
 #if __riscv_xlen == 32
     c = __rv__radd8(a, b);
-    test_c = __rv__v_uadd8(test_a32, test_b32);
+      test_c = __rv__v_uadd8(test_a32, test_b32);
     test_ic = __rv__v_sadd8(test_ia32, test_ib32);
 #else
     c = __rv__add8(a, b);
@@ -123,11 +126,75 @@ static void test_bitrev(void)
     printf("bitrev is %p\n", c);
 }
 
+static void test_bpick(void)
+{
+    c = __rv__bpick(a, b, c);
+    printf("bpick is %p\n", c);
+}
+
+
+static void test_clrov(void)
+{
+    //__rv__clrov();
+    //printf("clrov is %p\n", c);
+}
+
+
+static void test_clrs8(void)
+{
+    printf("test func is %s\n", __func__);
+#if __riscv_xlen == 32
+    c = __rv__clrs8(a);
+    //test_c = __rv__v_clrs8(test_a32, test_b32);
+    test_ic = __rv__v_clrs8(test_ia32);
+#else
+    c = __rv__clrs8(a);
+    //test_c = __rv__v_uadd8(test_a, test_b);
+    test_ic =  __rv__v_clrs8(test_ia);
+#endif
+    printf("c is %p\n", c);
+    //printf("test_c is %p\n", test_c);
+    printf("test_ic is %p\n", test_ic);
+}
+
+static void test_clrs16(void)
+{
+    printf("test func is %s\n", __func__);
+#if __riscv_xlen == 32
+    c = __rv__clrs16(a);
+    test_ic16 = __rv__v_clrs16(test_ia16);
+#else
+    c = __rv__clrs16(a);
+    test_ic16 =  __rv__v_clrs16(test_ia16);
+#endif
+    printf("c is %p\n", c);
+    printf("test_ic is %p\n", test_ic16);
+}
+
+//uintXLEN_t __rv__clrs32(uintXLEN_t a);
+// uint32x2_t __rv__v_clrs32(int32x2_t a);
+static void test_clrs32(void)
+{
+    printf("test func is %s\n", __func__);
+#if __riscv_xlen == 32
+    c = __rv__clrs32(a);
+#else
+    c = __rv__clrs32(a);
+    //test_ic32 =  __rv__v_clrs32(test_ia32);
+#endif
+    printf("c is %p\n", c);
+    //printf("test_ic is %p\n", test_ic32);
+}
+
 void test_dsp(void)
 {
     
     test_add8();
     test_add16();
     test_add64();
-    test_bitrev();
+    //test_bitrev();
+    //test_bpick();
+    test_clrs8();
+    test_clrs16();
+    test_clrs32();
 }
